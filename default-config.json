@@ -1,0 +1,44 @@
+{
+  "styles": {
+    "default": {
+      "background_color": 0xffffff,
+      "foreground_color": 0x000000,
+      "font": "roboto_regular",
+      "font_sizes": [12,18,22],
+      "icon_sizes": [18,24,48],
+      "icon_state_on_color" : 0xffff00,
+      "header_height" : 24,
+      "header_font_size": 22,
+      "header_icon_size": 24,
+      "header_background_color" : 0x049cdb,
+      "header_text_color" : 0xffffff
+    },
+    "dark": {
+      "background_color" : 0x000000,
+      "foreground_color": 0xffffff,
+      "font" : "roboto_regular",
+      "font_sizes" : [12,18,22],
+      "icon_sizes": [18,24,48],
+      "icon_state_on_color" : 0xffff00,
+      "header_height" : 24,
+      "header_font_size": 22,
+      "header_icon_size": 24,
+      "header_background_color" : 0x000000,
+      "header_text_color" : 0xffffff
+    }
+  }
+  "cards": {
+    "badge_battery": {
+      "title": "Badge Battery",
+      "icon": "mdi:battery"
+      "type": "single",
+      "entity_ids": ["sensor.badge_battery"],
+      "show_header_toggle": "false"
+    },
+    "lights": {
+      "title": "Lights",
+      "type": "entities",
+      "entity_ids": ["light.office_led", "light.door_light"],
+    }
+  }
+}
