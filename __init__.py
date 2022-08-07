@@ -5,15 +5,21 @@ from homebadge import hapy
 
 class HomeBadge:
     def __init__(self):
+        self.config = self.get_config()
         # Init a Home Assistant client
         self.ha = self.get_ha()
 
+    def get_config(self):
+        # Read default configuration from file
+        config_file = open("/sd/apps/python/homebadge/default-config.json", "r")
+        config_json = config_file.read()
+        config_file.close()
+        return ujson.loads(config_json)
+
     def get_ha(self):
-        # Get the Home Assistant URL from nvs:
-        ha_url = nvs.nvs_getstr('homebadge', 'ha_url')
-        # Check if we have a long lived token in nvs.
-        ha_token = nvs.nvs_getstr("homebadge", "ha_token")
-        ha = hapy.HAClient(ha_url, access_token = ha_token)
+        # Load the secrets from nvs
+        secrets = ujson.loads(nvs.nvs_getstr('homebadge', 'secrets'))
+        ha = hapy.HaPyRest(secrets)
         return ha
 
     def draw_header(self, card_id):
