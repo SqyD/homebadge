@@ -1,6 +1,46 @@
 {
+  "card_types": {
+    "entity": {
+      "name": "Entity",
+      "description": "The Entity card gives you a quick overview of your entity’s state.",
+      "draw_callback": "draw_card_entity",
+    },
+  },
+  "cards": {
+    "power": {
+      "type": "entity",
+      "entity": "badge.sensor.power",
+      "name": "Badge Power Status",
+    },
+  },
+  "hardware": {
+    "badge.sensor.power": {
+      "enabled": true,
+      "ha_entity_id": "sensor.badge_power",
+      "callback": "entity_get_power",
+      "ttl": 60,
+    },
+    "badge.sensor.battery": {
+      "enabled": true,
+      "ha_entity_id": "sensor.badge_battery",
+      "callback": "entity_get_power_battery",
+      "ttl": 60,
+    },
+    "badge.binary_sensor.wifi": {
+      "enabled": true,
+      "ha_entity_id": "binary_sensor.badge_wifi",
+      "callback": "entity_get_wifi",
+    },
+    "badge.sensor.nickname": {
+      "enabled": true,
+      "ha_entity_id": "sensor.badge_nickname",
+      "callback": "entity_get_nickname",
+      "ttl": 424242,
+    },
+  },
   "styles": {
     "default": {
+      "font": "roboto_regular",
       "font-size": 22,
       "primary-text-color": "0x212121",
       "secondary-text-color": "0x727272",
@@ -27,6 +67,23 @@
       "state-not_home-color": "0xff0029",
       "state-unknown-color": "0x606060",
       "state-idle-color": "0x7990a3"
+    },
+  },
+  "icons": {
+    "path": "/sd/apps/python/homebadge/icons",
+    "file": "/%color%/%size%/%name%.png",
+  },
+  "defaults": {
+    "light": {
+      "icon": "mdi:lightbulb",
+      "supported_features": {
+        "Effect": 4,
+        "Flash": 8,
+        "Transition": 32,
+      },
+    },
+    "sensor": {
+      "icon": "mid:eye",
     },
   },
 }

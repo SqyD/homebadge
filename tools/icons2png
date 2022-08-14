@@ -1,0 +1,37 @@
+#!/bin/bash
+
+# sed 's/path\ d/path\ fill\=\"\#ffffff\"\ d/g' menu.svg
+
+# inkscape -w 64 -h 64 MaterialDesign-SVG/svg/lightbulb.svg --export-background=white --export-filename lightbulb-64.png
+
+
+
+# sizes=(24 36 48 64 96)
+# sizes=(18 24 48)
+sizes=(24 48)
+# colors=("000000" "FFFFFF")
+colors=("44739F")
+
+svgs=MaterialDesign/svg/*.svg
+pngs=homebadge/icons
+
+for svg in $svgs
+do
+  icon=$(basename "$svg" .svg)
+  echo "Processing icon $icon"
+  for color in "${colors[@]}"
+  do
+    mkdir -p $pngs/$color
+    echo $color
+    cp $svg $pngs/$color/$icon.svg
+    findreplace="s/path\ d/path\ fill\=\"\#$color\"\ d/g"
+    svgexport="$pngs/$color/$icon.svg"
+    sed "$findreplace" $svg > $svgexport
+    for size in "${sizes[@]}"
+    do
+      echo "Size: $size"
+      mkdir -p $pngs/$color/$size
+      inkscape -w $size -h $size $pngs/$color/$icon.svg --export-filename $pngs/$color/$size/$icon.png
+    done
+  done
+done
