@@ -25,7 +25,7 @@ Easy: Just use the badge installer to install the "HomeBadge" egg from the Hatch
 Hack: Take the .py and .json files from this project, add the hapy.py from it's project and place all of the files on the badge using the badge tools.
 
 ## Icons
-Home Assistant uses the icons from the MaterialDesign project. As the original source has SVG images, I have generated a collection of png files using the icons2png bash file in the tools directory. It relies on Inkscape for the format conversion. 
+Home Assistant uses the icons from the MaterialDesign project. As the original source has SVG images, I have generated a collection of png files using the icons2png bash file in the tools directory. It relies on Inkscape for the format conversion.
 
 ## Authentication
 You will need to create and configure a so called "Long-Lived Access Token".
@@ -36,9 +36,9 @@ You will need to create and configure a so called "Long-Lived Access Token".
 * Connect to the builtin python shell.
 * Insert your Home Assistant url ("http://192.168.1.23") and token to these commands:
 ```
-import nvs
+import nvs, ujson
 secrets = {"url": "your_home_assistant_url", "access_token": "AABBCC112233"}
-nvs.nvs_setstr('homebadge', 'secrets', secrets)
+nvs.nvs_setstr('homebadge', 'secrets', ujson.dumps(secrets))
 ```
 
 * This project as an Egg in the badge.team Hatchery: https://mch2022.badge.team/projects/homebadge
